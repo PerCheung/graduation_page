@@ -140,7 +140,7 @@ export default {
   height: 100%;
   position: absolute;
   width: 100%;
-  background-image: url('../../public/reg.jpg');
+  background-image: url('../../public/index.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
