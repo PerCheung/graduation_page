@@ -60,7 +60,7 @@
           </el-submenu>
           <el-submenu index="5">
             <template slot="title"><i class="el-icon-s-order" style="color:#257b93"></i>公告模块</template>
-            <el-menu-item index="/Announcement">
+            <el-menu-item index="/">
               <div>
                 <i class="el-icon-s-order"></i>公告管理
               </div>
@@ -108,16 +108,16 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: "TeacherHome",
   created() {
     const _this = this;
-    axios.get('http://localhost:8081/adminUser/' + sessionStorage.getItem('userId')).then(function (resp) {
-      _this.user = resp.data.data.username + resp.data.data.userTitle;
+    axios.get('http://localhost:8081/teacher/' + sessionStorage.getItem('teacherId')).then(function (resp) {
+      _this.user = resp.data.data.teacherName;
     })
   },
   methods: {
     logout() {
-      sessionStorage.removeItem('userId');
+      sessionStorage.removeItem('teacherId');
       this.$router.push('/login') // 返回登录页面
     }
   },
@@ -129,68 +129,6 @@ export default {
 }
 </script>
 
-<style>
-.home_container {
-  background-image: url('../../public/index.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
+<style scoped>
 
-.home_header {
-  background-color: transparent;
-  color: #176175;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.home_aside {
-  background-color: #cbede6;
-  font-weight: bold;
-}
-
-.home_menu {
-  background-color: #d5eff0;
-  color: black;
-}
-
-.home_footer {
-  background-color: transparent;
-  text-align: center;
-  color: rgb(142, 142, 145);
-  font-size: 16px;
-  line-height: 60px;
-}
-
-.home_title {
-  font-size: 22px;
-  display: inline;
-  font-weight: bold;
-}
-
-.home_title-right {
-  font-size: 22px;
-  display: inline;
-  color: rgb(67, 66, 141);
-}
-
-.el-container-right {
-  background-image: url('../../public/index.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.page {
-  position: fixed;
-  top: 86%;
-  right: 42px;
-}
 </style>

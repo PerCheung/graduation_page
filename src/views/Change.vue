@@ -1,8 +1,12 @@
 <template>
   <div class="change">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item prop="password">
-        <el-input placeholder="请输入用户密码" v-model="ruleForm.password" prefix-icon="el-icon-key" show-password>
+      <el-form-item prop="oldPassword">
+        <el-input placeholder="请输入原密码" v-model="ruleForm.oldPassword" prefix-icon="el-icon-key" show-password>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="newPassword">
+        <el-input placeholder="请输入新密码" v-model="ruleForm.newPassword" prefix-icon="el-icon-key" show-password>
         </el-input>
       </el-form-item>
       <el-form-item prop="checkPassword">
@@ -23,7 +27,7 @@ export default {
   name: "Change",
   data() {
     let validatePass = (rule, value, callback) => {
-      if (value !== this.ruleForm.password) {
+      if (value !== this.ruleForm.newPassword) {
         callback(new Error('两次输入密码不一致!'));
       } else {
         callback();
@@ -31,12 +35,17 @@ export default {
     };
     return {
       ruleForm: {
-        password: '',
+        userId: sessionStorage.getItem('userId'),
+        oldPassword: '',
+        newPassword: '',
         checkPassword: ''
       },
       rules: {
-        password: [
-          {required: true, message: '请输入密码', trigger: 'blur'}
+        oldPassword: [
+          {required: true, message: '请输入原密码', trigger: 'blur'}
+        ],
+        newPassword: [
+          {required: true, message: '请输入新密码', trigger: 'blur'}
         ],
         checkPassword: [
           {required: true, message: '请确认密码', trigger: 'blur'},
@@ -49,16 +58,18 @@ export default {
     submitForm(form, formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          axios.post('http://localhost:8081/adminUser', form).then((resp) => {
-            if (resp.data.data == '验证码错误') {
+          axios.put('http://localhost:8081/adminUser/change', form).then((resp) => {
+            if (resp.data.data == true) {
+              this.$message({
+                type: 'success',
+                message: '密码修改成功'
+              });
+              sessionStorage.removeItem('userId');
+              this.$router.push('/login') // 返回登录页面
+            } else {
               this.$message({
                 type: 'error',
                 message: resp.data.data
-              });
-            } else if (resp.data.data == true) {
-              this.$message({
-                type: 'success',
-                message: '注册成功'
               });
             }
           })
@@ -79,10 +90,7 @@ export default {
   background-color: transparent;
   border-radius: 10px;
   width: 450px;
-  margin-top: 170px;
-  margin-left: 200px;
-  margin-right: 0;
-  margin-bottom: 0;
+  margin: 150px 0 0 200px;
   text-align: center;
 }
 </style>
