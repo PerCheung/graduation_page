@@ -21,7 +21,7 @@
           </el-form-item>
           <el-form-item prop="role">
             <el-radio-group v-model="ruleForm.role">
-              <el-radio-button disabled>选择登录身份
+              <el-radio-button disabled>选择登录身份：
               </el-radio-button>
               <el-radio-button label="0">管理员
               </el-radio-button>
@@ -85,6 +85,44 @@ export default {
                   type: 'success',
                   message: resp.data.data
                 });
+                sessionStorage.setItem('userId', this.ruleForm.userId);
+                this.$router.push({name: '主页', params: {id: this.ruleForm.userId}})
+              } else {
+                this.$message({
+                  type: 'error',
+                  message: resp.data.data
+                });
+              }
+            })
+          }
+          if (this.ruleForm.role == 1) {
+            let teacher = {teacherId: this.ruleForm.userId, password: this.ruleForm.password};
+            axios.post('http://localhost:8081/teacher/login', teacher).then((resp) => {
+              if (resp.data.data == '登录成功') {
+                this.$message({
+                  type: 'success',
+                  message: resp.data.data
+                });
+                sessionStorage.setItem('teacherId', this.ruleForm.userId);
+                this.$router.push({name: '教师主页', params: {id: this.ruleForm.userId}})
+              } else {
+                this.$message({
+                  type: 'error',
+                  message: resp.data.data
+                });
+              }
+            })
+          }
+          if (this.ruleForm.role == 2) {
+            let student = {studentId: this.ruleForm.userId, password: this.ruleForm.password};
+            axios.post('http://localhost:8081/student/login', student).then((resp) => {
+              if (resp.data.data == '登录成功') {
+                this.$message({
+                  type: 'success',
+                  message: resp.data.data
+                });
+                sessionStorage.setItem('studentId', this.ruleForm.userId);
+                this.$router.push({name: '学生主页', params: {id: this.ruleForm.userId}})
               } else {
                 this.$message({
                   type: 'error',
@@ -94,7 +132,6 @@ export default {
             })
           }
         } else {
-          console.log('error submit!!');
           return false;
         }
       });
