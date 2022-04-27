@@ -15,7 +15,7 @@
                 <i class="el-icon-s-custom"></i>教师管理
               </div>
             </el-menu-item>
-            <el-menu-item index="/AddTeacher">
+            <el-menu-item index="/">
               <div>
                 <i class="el-icon-circle-plus"></i>添加教师
               </div>
@@ -28,7 +28,7 @@
                 <i class="el-icon-s-custom"></i>学生管理
               </div>
             </el-menu-item>
-            <el-menu-item index="/AddStudent">
+            <el-menu-item index="/">
               <div>
                 <i class="el-icon-circle-plus"></i>添加学生
               </div>
@@ -65,18 +65,18 @@
                 <i class="el-icon-s-order"></i>公告管理
               </div>
             </el-menu-item>
-            <el-menu-item index="/AddAnnouncement">
+            <el-menu-item index="/">
               <div>
                 <i class="el-icon-circle-plus"></i>添加公告
               </div>
             </el-menu-item>
           </el-submenu>
-          <el-menu-item index="/self">
+          <el-menu-item index="/StudentStudentSelf">
             <div>
               <i class="el-icon-user-solid"></i>个人信息管理
             </div>
           </el-menu-item>
-          <el-menu-item index="/change">
+          <el-menu-item index="/StudentChange">
             <div>
               <i class="el-icon-key"></i>修改密码
             </div>
@@ -93,12 +93,13 @@
       <el-container class="el-container-right">
         <el-main class="home_main">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{path: '/'}">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{path: '/studentHome'}">首页</el-breadcrumb-item>
             <el-breadcrumb-item v-text="this.$router.currentRoute.name"></el-breadcrumb-item>
           </el-breadcrumb>
           <router-view/>
         </el-main>
-        <el-footer class="home_footer">Copyright © 2022 Peter Cheung 保留所有权利。</el-footer>
+        <!--        <el-footer class="home_footer"></el-footer>-->
+        <el-footer class="home_footer">Copyright © 2022 Peter Cheung 保留所有权利</el-footer>
       </el-container>
 
     </el-container>

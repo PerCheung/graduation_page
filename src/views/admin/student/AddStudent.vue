@@ -17,9 +17,9 @@
         <el-radio-group v-model="ruleForm.sex">
           <el-radio-button disabled>选择学生性别：
           </el-radio-button>
-          <el-radio-button label="1">男
+          <el-radio-button label="男">男
           </el-radio-button>
-          <el-radio-button label="0">女
+          <el-radio-button label="女">女
           </el-radio-button>
         </el-radio-group>
       </el-form-item>

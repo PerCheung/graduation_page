@@ -64,7 +64,6 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let data = {userId: sessionStorage.getItem('userId'), username: form.username, userTitle: form.userTitle};
-          console.log(data);
           axios.put('http://localhost:8081/adminUser', data).then((resp) => {
             if (resp.data.data == true) {
               this.$message({

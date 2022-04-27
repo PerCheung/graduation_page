@@ -1,18 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/admin/Home'
-import Login from "../views/Login";
+import Login from "../views/Login"
 import Reg from "../views/Reg"
-import Change from "../views/admin/admin/Change";
-import AdminSelf from "../views/admin/admin/AdminSelf";
-import AddStudent from "../views/admin/student/AddStudent";
-import AddTeacher from "../views/admin/teacher/AddTeacher";
-import AddAnnouncement from "../views/admin/announcement/AddAnnouncement";
-import TeacherHome from "../views/teacher/TeacherHome";
-import StudentHome from "../views/student/StudentHome";
-import Announcement from "../views/admin/announcement/Announcement";
-import EditAnnouncement from "../views/admin/announcement/EditAnnouncement";
-import DetailAnnouncementId from "../views/admin/announcement/DetailAnnouncementId";
+import Change from "../views/admin/admin/Change"
+import AdminSelf from "../views/admin/admin/AdminSelf"
+import AddStudent from "../views/admin/student/AddStudent"
+import AddTeacher from "../views/admin/teacher/AddTeacher"
+import AddAnnouncement from "../views/admin/announcement/AddAnnouncement"
+import TeacherHome from "../views/teacher/TeacherHome"
+import StudentHome from "../views/student/StudentHome"
+import Announcement from "../views/admin/announcement/Announcement"
+import EditAnnouncement from "../views/admin/announcement/EditAnnouncement"
+import DetailAnnouncementId from "../views/admin/announcement/DetailAnnouncementId"
+import Teacher from "../views/admin/teacher/Teacher"
+import Student from "../views/admin/student/Student"
+import TeacherTeacherSelf from "../views/teacher/teacher/TeacherTeacherSelf"
+import TeacherChange from "../views/teacher/teacher/TeacherChange"
+import StudentStudentSelf from "../views/student/student/StudentStudentSelf"
+import StudentChange from "../views/student/student/StudentChange";
 
 Vue.use(VueRouter)
 
@@ -29,7 +35,7 @@ const routes = [
             },
             {
                 path: '/self',
-                name: '个人信息',
+                name: '个人信息管理',
                 component: AdminSelf
             },
             {
@@ -38,9 +44,18 @@ const routes = [
                 component: AddTeacher
             },
             {
+                path: '/Teacher',
+                name: '教师管理',
+                component: Teacher
+            },
+            {
                 path: '/AddStudent',
                 name: '添加学生',
                 component: AddStudent
+            }, {
+                path: '/Student',
+                name: '学生管理',
+                component: Student
             },
             {
                 path: '/AddAnnouncement',
@@ -67,12 +82,37 @@ const routes = [
     {
         path: '/teacherHome',
         name: '教师主页',
-        component: TeacherHome
+        component: TeacherHome,
+        children: [
+            {
+                path: '/TeacherTeacherSelf',
+                name: '教师主页-个人信息管理',
+                component: TeacherTeacherSelf
+            },
+            {
+                path: '/TeacherChange',
+                name: '教师主页-密码修改',
+                component: TeacherChange
+            }
+        ]
     },
     {
         path: '/studentHome',
         name: '学生主页',
-        component: StudentHome
+        component: StudentHome,
+        children: [
+            {
+                path: '/StudentStudentSelf',
+                name: '学生主页-个人信息管理',
+                component: StudentStudentSelf
+            }
+            ,
+            {
+                path: '/StudentChange',
+                name: '学生主页-密码修改',
+                component: StudentChange
+            }
+        ]
     },
     {
         path: '/login',

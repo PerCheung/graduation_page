@@ -10,7 +10,7 @@
         <el-menu class="home_menu" router background-color="#c8ede5" text-color="#176175" active-text-color="#f88f3d">
           <el-submenu index="0">
             <template slot="title"><i class="el-icon-user" style="color:#257b93"></i>教师模块</template>
-            <el-menu-item index="/">
+            <el-menu-item index="/Teacher">
               <div>
                 <i class="el-icon-s-custom"></i>教师管理
               </div>
@@ -23,7 +23,7 @@
           </el-submenu>
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-user" style="color:#257b93"></i>学生模块</template>
-            <el-menu-item index="/">
+            <el-menu-item index="/Student">
               <div>
                 <i class="el-icon-s-custom"></i>学生管理
               </div>
@@ -98,7 +98,8 @@
           </el-breadcrumb>
           <router-view/>
         </el-main>
-        <el-footer class="home_footer">Copyright © 2022 Peter Cheung 保留所有权利。</el-footer>
+        <!--        <el-footer class="home_footer"></el-footer>-->
+        <el-footer class="home_footer">Copyright © 2022 Peter Cheung 保留所有权利</el-footer>
       </el-container>
 
     </el-container>
