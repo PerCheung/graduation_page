@@ -1,6 +1,14 @@
 <template>
-  <div class="AddAnnouncement">
+  <div class="EditAnnouncement">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form-item prop="createTime">
+        <el-input disabled v-model="ruleForm.createTime" prefix-icon="el-icon-date">
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="username">
+        <el-input disabled v-model="ruleForm.username" prefix-icon="el-icon-user-solid">
+        </el-input>
+      </el-form-item>
       <el-form-item prop="announcementTitle">
         <el-input placeholder="请输入公告标题" v-model="ruleForm.announcementTitle" prefix-icon="el-icon-s-order"
                   show-word-limit
@@ -14,8 +22,12 @@
                   maxlength="255">
         </el-input>
       </el-form-item>
+      <el-form-item prop="updateTime">
+        <el-input disabled v-model="ruleForm.updateTime" prefix-icon="el-icon-date">
+        </el-input>
+      </el-form-item>
       <el-form-item>
-        <el-button type="success" icon="el-icon-success" @click="submitForm(ruleForm,'ruleForm')">发布公告</el-button>
+        <el-button type="success" icon="el-icon-success" @click="submitForm(ruleForm,'ruleForm')">修改公告</el-button>
         <el-button type="danger" icon="el-icon-delete" @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -24,13 +36,27 @@
 
 <script>
 export default {
-  name: "AddAnnouncement",
+  name: "EditAnnouncement",
+  created() {
+    let _this = this;
+    axios.get('http://localhost:8081/adminUser/' + this.$route.params.userId).then(function (resp) {
+      _this.ruleForm.username = '此公告发布人：' + resp.data.data.username + resp.data.data.userTitle;
+    })
+    axios.get('http://localhost:8081/announcement/' + this.$route.params.announcementId).then(function (resp) {
+      _this.ruleForm.announcementId = resp.data.data.announcementId;
+      _this.ruleForm.announcementTitle = resp.data.data.announcementTitle;
+      _this.ruleForm.announcementMain = resp.data.data.announcementMain;
+      _this.ruleForm.createTime = '公告创建时间：' + resp.data.data.createTime;
+      _this.ruleForm.updateTime = '上次修改时间：' + resp.data.data.updateTime;
+    })
+  },
   data() {
     return {
       ruleForm: {
+        announcementId: '',
         announcementTitle: '',
         announcementMain: '',
-        userId: sessionStorage.getItem('userId')
+        username: ''
       },
       rules: {
         announcementTitle: [
@@ -48,16 +74,23 @@ export default {
     submitForm(form, formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          axios.post('http://localhost:8081/announcement', form).then((resp) => {
+          let announcement = {
+            announcementId: form.announcementId,
+            announcementTitle: form.announcementTitle,
+            announcementMain: form.announcementMain,
+            userId: sessionStorage.getItem('userId')
+          }
+          axios.put('http://localhost:8081/announcement', announcement).then((resp) => {
             if (resp.data.data == true) {
               this.$message({
                 type: 'success',
-                message: '发布成功'
+                message: '修改成功'
               });
+              this.$router.push('/Announcement')
             } else {
               this.$message({
                 type: 'error',
-                message: '发布失败'
+                message: '修改失败'
               });
             }
           })
@@ -74,10 +107,10 @@ export default {
 </script>
 
 <style scoped>
-.AddAnnouncement {
+.EditAnnouncement {
   background-color: transparent;
   border-radius: 10px;
-  width: 450px;
-  margin: 100px 0 0 240px;
+  width: 650px;
+  margin: 40px 0 0 140px;
 }
 </style>

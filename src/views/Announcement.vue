@@ -24,12 +24,23 @@
               plain
               @click="handleEdit(scope.$index, scope.row)">编辑
           </el-button>
-          <el-button
-              size="mini"
-              type="danger"
-              plain
-              @click="handleDelete(scope.$index, scope.row)">删除
-          </el-button>
+          &nbsp
+          <el-popconfirm
+              confirm-button-text='确定'
+              cancel-button-text='不用了'
+              icon="el-icon-s-order"
+              icon-color="red"
+              title="确认要删除这个公告吗？"
+              @confirm="handleDelete(scope.$index, scope.row)"
+              @cancel="noHandleDelete"
+          >
+            <el-button
+                slot="reference"
+                size="mini"
+                type="danger"
+                plain>删除
+            </el-button>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -64,21 +75,33 @@ export default {
         _this.total = resp.data.data.total;
       })
     },
+    noHandleDelete() {
+      this.$message({
+        type: 'info',
+        message: '取消删除'
+      });
+    },
     detail(index, row) {
-      console.log(index, row);
+      this.$router.push({name: '公告详情', params: {announcementId: row.announcementId, userId: row.userId}})
     },
     handleEdit(index, row) {
-      console.log(index, row);
+      this.$router.push({name: '修改公告', params: {announcementId: row.announcementId, userId: row.userId}})
     },
     handleDelete(index, row) {
-      console.log(index, row);
+      axios.delete('http://localhost:8081/announcement?id=' + row.announcementId).then(function () {
+      })
+      this.$message({
+        type: 'success',
+        message: '删除成功!'
+      });
+      location.reload();
     }
   },
   data() {
     return {
       tableData: [],
       pageSize: 7,
-      total: 100,
+      total: 50,
       currentPage: 1
     }
   }

@@ -11,6 +11,8 @@ import AddAnnouncement from "../views/AddAnnouncement";
 import TeacherHome from "../views/TeacherHome";
 import StudentHome from "../views/StudentHome";
 import Announcement from "../views/Announcement";
+import EditAnnouncement from "../views/EditAnnouncement";
+import DetailAnnouncementId from "../views/DetailAnnouncementId";
 
 Vue.use(VueRouter)
 
@@ -49,6 +51,16 @@ const routes = [
                 path: '/Announcement',
                 name: '公告管理',
                 component: Announcement
+            },
+            {
+                path: '/EditAnnouncement',
+                name: '修改公告',
+                component: EditAnnouncement
+            },
+            {
+                path: '/DetailAnnouncementId',
+                name: '公告详情',
+                component: DetailAnnouncementId
             }
         ]
     },
