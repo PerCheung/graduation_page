@@ -54,6 +54,7 @@ export default {
                 type: 'success',
                 message: '发布成功'
               });
+              this.$router.push('/Announcement')
             } else {
               this.$message({
                 type: 'error',

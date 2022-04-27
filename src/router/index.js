@@ -1,18 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home'
+import Home from '../views/admin/Home'
 import Login from "../views/Login";
 import Reg from "../views/Reg"
-import Change from "../views/Change";
-import AdminSelf from "../views/AdminSelf";
-import AddStudent from "../views/AddStudent";
-import AddTeacher from "../views/AddTeacher";
-import AddAnnouncement from "../views/AddAnnouncement";
-import TeacherHome from "../views/TeacherHome";
-import StudentHome from "../views/StudentHome";
-import Announcement from "../views/Announcement";
-import EditAnnouncement from "../views/EditAnnouncement";
-import DetailAnnouncementId from "../views/DetailAnnouncementId";
+import Change from "../views/admin/admin/Change";
+import AdminSelf from "../views/admin/admin/AdminSelf";
+import AddStudent from "../views/admin/student/AddStudent";
+import AddTeacher from "../views/admin/teacher/AddTeacher";
+import AddAnnouncement from "../views/admin/announcement/AddAnnouncement";
+import TeacherHome from "../views/teacher/TeacherHome";
+import StudentHome from "../views/student/StudentHome";
+import Announcement from "../views/admin/announcement/Announcement";
+import EditAnnouncement from "../views/admin/announcement/EditAnnouncement";
+import DetailAnnouncementId from "../views/admin/announcement/DetailAnnouncementId";
 
 Vue.use(VueRouter)
 

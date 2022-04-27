@@ -131,7 +131,7 @@ export default {
 
 <style>
 .home_container {
-  background-image: url('../../public/index.jpg');
+  background-image: url('../../../public/index.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -182,7 +182,7 @@ export default {
 }
 
 .el-container-right {
-  background-image: url('../../public/index.jpg');
+  background-image: url('../../../public/index.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
