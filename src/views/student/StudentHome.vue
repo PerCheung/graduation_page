@@ -58,19 +58,11 @@
               </div>
             </el-menu-item>
           </el-submenu>
-          <el-submenu index="5">
-            <template slot="title"><i class="el-icon-s-order" style="color:#257b93"></i>公告模块</template>
-            <el-menu-item index="/">
-              <div>
-                <i class="el-icon-s-order"></i>公告管理
-              </div>
-            </el-menu-item>
-            <el-menu-item index="/">
-              <div>
-                <i class="el-icon-circle-plus"></i>添加公告
-              </div>
-            </el-menu-item>
-          </el-submenu>
+          <el-menu-item index="/StudentAnnouncement">
+            <div>
+              <i class="el-icon-s-order"></i>查看公告
+            </div>
+          </el-menu-item>
           <el-menu-item index="/StudentStudentSelf">
             <div>
               <i class="el-icon-user-solid"></i>个人信息管理

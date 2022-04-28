@@ -95,23 +95,23 @@ export default {
     noHandleDelete() {
       this.$message({
         type: 'info',
-        message: '取消删除'
+        message: '操作取消'
       });
     },
     detail(index, row) {
-      // this.$router.push({name: '公告详情', params: {announcementId: row.announcementId, userId: row.userId}})
+      this.$router.push({name: '教师详情', params: {teacherId: row.teacherId}})
     },
     handleEdit(index, row) {
-      // this.$router.push({name: '修改公告', params: {announcementId: row.announcementId, userId: row.userId}})
+      this.$router.push({name: '编辑教师信息', params: {teacherId: row.teacherId}})
     },
     initialization(index, row) {
-      // axios.delete('http://localhost:8081/announcement?id=' + row.announcementId).then(function () {
-      // })
-      // this.$message({
-      //   type: 'success',
-      //   message: '删除成功!'
-      // });
-      // location.reload();
+      let teacher = {teacherId: row.teacherId}
+      axios.put('http://localhost:8081/teacher/initialization', teacher).then(function () {
+      })
+      this.$message({
+        type: 'success',
+        message: '重置密码成功!'
+      });
     }
   },
   data() {

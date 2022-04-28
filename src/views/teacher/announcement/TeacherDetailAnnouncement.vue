@@ -1,16 +1,16 @@
 <template>
-  <div class="DetailAnnouncementId">
+  <div class="TeacherDetailAnnouncement">
     <h1>{{ announcement.announcementTitle }}</h1><br>
-    <p class="DetailAnnouncementId_date">上次修改时间：{{ announcement.updateTime }}</p><br>
-    <p class="DetailAnnouncementId_main">{{ announcement.announcementMain }}</p><br>
-    <p class="DetailAnnouncementId_user">最终发布人：{{ user.username + user.userTitle }}</p>
-    <p class="DetailAnnouncementId_date">发布时间：{{ announcement.createTime }}</p>
+    <p class="TeacherDetailAnnouncement_date">上次修改时间：{{ announcement.updateTime }}</p><br>
+    <p class="TeacherDetailAnnouncement_main">{{ announcement.announcementMain }}</p><br>
+    <p class="TeacherDetailAnnouncement_user">最终发布人：{{ user.username + user.userTitle }}</p>
+    <p class="TeacherDetailAnnouncement_date">发布时间：{{ announcement.createTime }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "DetailAnnouncementId",
+  name: "TeacherDetailAnnouncement",
   created() {
     let _this = this;
     axios.get('http://localhost:8081/adminUser/' + this.$route.params.userId).then(function (resp) {
@@ -53,25 +53,25 @@ export default {
 </script>
 
 <style scoped>
-.DetailAnnouncementId {
+.TeacherDetailAnnouncement {
   font-weight: bold;
   width: 800px;
   margin-top: 20px;
   margin-left: 100px;
 }
 
-.DetailAnnouncementId h1 {
+.TeacherDetailAnnouncement h1 {
   color: rgb(56, 54, 136);
   text-align: center;
   font-size: 23px;
 }
 
-.DetailAnnouncementId_date {
+.TeacherDetailAnnouncement_date {
   color: rgb(56, 54, 136);
   text-align: right;
 }
 
-.DetailAnnouncementId_main {
+.TeacherDetailAnnouncement_main {
   background: linear-gradient(to left, rgb(56, 54, 136), rgb(229, 85, 70));
   -webkit-background-clip: text;
   color: transparent;
@@ -79,7 +79,7 @@ export default {
   text-align: justify;
 }
 
-.DetailAnnouncementId_user {
+.TeacherDetailAnnouncement_user {
   color: rgb(56, 54, 136);
   text-align: right;
 }
