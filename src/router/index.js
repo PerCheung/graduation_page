@@ -27,6 +27,18 @@ import EditStudent from "../views/admin/student/EditStudent"
 import DetailStudent from "../views/admin/student/DetailStudent"
 import DetailTeacher from "../views/admin/teacher/DetailTeacher"
 import EditTeacher from "../views/admin/teacher/EditTeacher"
+import TeacherAddTopic from "../views/teacher/topic/TeacherAddTopic"
+import TeacherTopic from "../views/teacher/topic/TeacherTopic"
+import Topic from "../views/admin/topic/Topic"
+import TopicNotReviewed from "../views/admin/topic/TopicNotReviewed"
+import TopicNO from "../views/admin/topic/TopicNO"
+import AuditTopic from "../views/admin/topic/AuditTopic"
+import TopicReviewed from "../views/admin/topic/TopicReviewed"
+import TeacherEditTopic from "../views/teacher/topic/TeacherEditTopic"
+import TeacherDetailTopic from "../views/teacher/topic/TeacherDetailTopic"
+import StudentTopic from "../views/student/topic/StudentTopic"
+import StudentChooseTopic from "../views/student/topic/StudentChooseTopic"
+import StudentMyTopic from "../views/student/topic/StudentMyTopic"
 
 Vue.use(VueRouter)
 
@@ -102,6 +114,28 @@ const routes = [
                 path: '/DetailAnnouncement',
                 name: '公告详情',
                 component: DetailAnnouncement
+            },
+            {
+                path: '/Topic',
+                name: '课题管理',
+                component: Topic
+            },
+            {
+                path: '/TopicNotReviewed',
+                name: '查看未审核课题',
+                component: TopicNotReviewed
+            }, {
+                path: '/TopicNO',
+                name: '查看未通过课题',
+                component: TopicNO
+            }, {
+                path: '/AuditTopic',
+                name: '审核课题',
+                component: AuditTopic
+            }, {
+                path: '/TopicReviewed',
+                name: '查看已通过课题',
+                component: TopicReviewed
             }
         ]
     },
@@ -129,6 +163,22 @@ const routes = [
                 path: '/TeacherDetailAnnouncement',
                 name: '教师主页-公告详情',
                 component: TeacherDetailAnnouncement
+            }, {
+                path: '/TeacherAddTopic',
+                name: '教师主页-添加课题',
+                component: TeacherAddTopic
+            }, {
+                path: '/TeacherTopic',
+                name: '教师主页-课题管理',
+                component: TeacherTopic
+            }, {
+                path: '/TeacherEditTopic',
+                name: '教师主页-课题编辑',
+                component: TeacherEditTopic
+            }, {
+                path: '/TeacherDetailTopic',
+                name: '教师主页-课题详情',
+                component: TeacherDetailTopic
             }
         ]
     },
@@ -157,6 +207,18 @@ const routes = [
                 path: '/StudentDetailAnnouncement',
                 name: '学生主页-公告详情',
                 component: StudentDetailAnnouncement
+            }, {
+                path: '/StudentTopic',
+                name: '学生主页-查看已发布课题',
+                component: StudentTopic
+            }, {
+                path: '/StudentChooseTopic',
+                name: '学生主页-选择课题',
+                component: StudentChooseTopic
+            }, {
+                path: '/StudentMyTopic',
+                name: '学生主页-我的课题',
+                component: StudentMyTopic
             }
         ]
     },

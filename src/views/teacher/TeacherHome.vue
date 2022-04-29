@@ -9,52 +9,15 @@
       <el-aside width="200px" class="home_aside">
         <el-menu class="home_menu" router background-color="#c8ede5" text-color="#176175" active-text-color="#f88f3d">
           <el-submenu index="0">
-            <template slot="title"><i class="el-icon-user" style="color:#257b93"></i>教师模块</template>
-            <el-menu-item index="/">
+            <template slot="title"><i class="el-icon-tickets" style="color:#257b93"></i>课题模块</template>
+            <el-menu-item index="/TeacherTopic">
               <div>
-                <i class="el-icon-s-custom"></i>教师管理
+                <i class="el-icon-tickets"></i>课题管理
               </div>
             </el-menu-item>
-            <el-menu-item index="/">
+            <el-menu-item index="/TeacherAddTopic">
               <div>
-                <i class="el-icon-circle-plus"></i>添加教师
-              </div>
-            </el-menu-item>
-          </el-submenu>
-          <el-submenu index="1">
-            <template slot="title"><i class="el-icon-user" style="color:#257b93"></i>学生模块</template>
-            <el-menu-item index="/">
-              <div>
-                <i class="el-icon-s-custom"></i>学生管理
-              </div>
-            </el-menu-item>
-            <el-menu-item index="/">
-              <div>
-                <i class="el-icon-circle-plus"></i>添加学生
-              </div>
-            </el-menu-item>
-          </el-submenu>
-          <el-submenu index="2">
-            <template slot="title"><i class="el-icon-user" style="color:#257b93"></i>课题模块</template>
-            <el-menu-item index="/">
-              <div>
-                <i class="el-icon-s-custom"></i>课题管理
-              </div>
-            </el-menu-item>
-          </el-submenu>
-          <el-submenu index="3">
-            <template slot="title"><i class="el-icon-user" style="color:#257b93"></i>任务书模块</template>
-            <el-menu-item index="/">
-              <div>
-                <i class="el-icon-s-custom"></i>任务书管理
-              </div>
-            </el-menu-item>
-          </el-submenu>
-          <el-submenu index="4">
-            <template slot="title"><i class="el-icon-user" style="color:#257b93"></i>论文模块</template>
-            <el-menu-item index="/">
-              <div>
-                <i class="el-icon-s-custom"></i>论文管理
+                <i class="el-icon-circle-plus"></i>添加课题
               </div>
             </el-menu-item>
           </el-submenu>

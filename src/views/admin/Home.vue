@@ -35,10 +35,25 @@
             </el-menu-item>
           </el-submenu>
           <el-submenu index="2">
-            <template slot="title"><i class="el-icon-user" style="color:#257b93"></i>课题模块</template>
-            <el-menu-item index="/">
+            <template slot="title"><i class="el-icon-tickets" style="color:#257b93"></i>课题模块</template>
+            <el-menu-item index="/Topic">
               <div>
-                <i class="el-icon-s-custom"></i>课题管理
+                <i class="el-icon-tickets"></i>查看所有课题
+              </div>
+            </el-menu-item>
+            <el-menu-item index="/TopicNotReviewed">
+              <div>
+                <i class="el-icon-tickets"></i>查看未审核课题
+              </div>
+            </el-menu-item>
+            <el-menu-item index="/TopicNO">
+              <div>
+                <i class="el-icon-tickets"></i>查看未通过课题
+              </div>
+            </el-menu-item>
+            <el-menu-item index="/TopicReviewed">
+              <div>
+                <i class="el-icon-tickets"></i>查看已通过课题
               </div>
             </el-menu-item>
           </el-submenu>
