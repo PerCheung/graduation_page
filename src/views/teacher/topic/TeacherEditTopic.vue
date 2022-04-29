@@ -29,6 +29,13 @@
         <el-input disabled v-model="updateTime" prefix-icon="el-icon-date">
         </el-input>
       </el-form-item>
+      <el-form-item prop="topicMain">
+        <el-input placeholder="请描述课题任务以及主要内容" v-model="ruleForm.topicMain" type="textarea"
+                  :autosize="{ minRows: 5}"
+                  show-word-limit
+                  maxlength="255">
+        </el-input>
+      </el-form-item>
       <el-form-item>
         <el-button type="success" icon="el-icon-success" @click="submitForm(ruleForm,'ruleForm')">修改课题</el-button>
         <el-button type="danger" icon="el-icon-delete" @click="resetForm('ruleForm')">重置</el-button>
@@ -63,6 +70,7 @@ export default {
       _this.ruleForm.topicType = topic.topicType;
       _this.ruleForm.topicSource = topic.topicSource;
       _this.ruleForm.topicId = topic.topicId;
+      _this.ruleForm.topicMain = topic.topicMain;
       _this.createTime = "课题创建时间：" + topic.createTime
       _this.updateTime = "课题上次修改时间：" + topic.updateTime
     })
@@ -76,6 +84,7 @@ export default {
         topicName: '',
         topicType: '',
         topicSource: '',
+        topicMain: '',
         state: 0
       },
       rules: {
@@ -88,7 +97,10 @@ export default {
         ],
         topicSource: [
           {required: true, message: '请选择课题来源', trigger: 'change'}
-        ]
+        ], topicMain: [
+          {required: true, message: '请描述课题任务以及主要内容', trigger: 'blur'},
+          {min: 50, max: 255, message: '长度50到255个字符', trigger: 'blur'}
+        ],
       }
     };
   },
@@ -112,7 +124,6 @@ export default {
             form.topicSource = 1
           }
           axios.put('http://localhost:8081/topic', form).then((resp) => {
-            console.log(form)
             if (resp.data.data == true) {
               this.$message({
                 type: 'success',
@@ -143,6 +154,6 @@ export default {
   background-color: transparent;
   border-radius: 10px;
   width: 450px;
-  margin: 100px 0 0 240px;
+  margin: 10px 0 0 240px;
 }
 </style>

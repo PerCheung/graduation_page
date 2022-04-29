@@ -33,6 +33,12 @@
         <td>教师联系邮箱：{{ teacher.teacherEmail }}</td>
       </tr>
     </table>
+    <br>
+    <table>
+      <tr>
+        <td>{{ topic.topicMain }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -84,7 +90,7 @@ export default {
 .TeacherDetailTopic {
   background-color: rgb(217, 239, 239);
   width: 60%;
-  margin: 60px 0 0 180px;
+  margin: 10px 0 0 180px;
   border: 0.5px solid rgb(98, 159, 175);
   box-shadow: 0 5px 15px rgb(210, 210, 215);
   border-radius: 15px;
