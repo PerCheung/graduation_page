@@ -25,6 +25,12 @@
 <script>
 export default {
   name: "AddAnnouncement",
+  created() {
+    let e = sessionStorage.getItem('userId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
+  },
   data() {
     return {
       ruleForm: {

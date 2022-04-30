@@ -1,5 +1,5 @@
 <template>
-  <div class=StudentMyTopic>
+  <div class=StudentUploadThesis>
     <table class="table-one">
       <tr>
         <td>课题名称：{{ topic.topicName }}</td>
@@ -15,43 +15,42 @@
       </tr>
     </table>
     <br>
-    <table class="table-two">
-      <tr>
-        <td>课题创建教师：{{ teacher.teacherName }}</td>
-        <td>教师性别：{{ teacher.sex }}</td>
-      </tr>
-      <tr>
-        <td>教师职称：{{ teacher.teacherTitle }}</td>
-        <td>教师所在学院：{{ teacher.teacherCollege }}</td>
-      </tr>
-      <tr>
-        <td>教师联系电话：{{ teacher.teacherPhone }}</td>
-        <td>教师所属专业：{{ teacher.teacherMajor }}</td>
-      </tr>
-      <tr>
-        <td>教师工号：{{ teacher.teacherId }}</td>
-        <td>教师联系邮箱：{{ teacher.teacherEmail }}</td>
-      </tr>
-    </table>
-    <br>
-    <table>
-      <tr>
-        <td>{{ topic.topicMain }}</td>
-      </tr>
-    </table>
+    <div class="upload">
+      <h1 style="text-align: center;font-size: 23px">上传我的毕设</h1><br>
+      <el-form :model="ruleForm" ref="ruleForm" class="demo-ruleForm">
+        <el-upload
+            class="upload-demo"
+            action="http://localhost:8081/thesis"
+            accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            drag
+            :on-success="uploadSuccess"
+            :on-error="uploadError"
+            :before-upload="beforeAvatarUpload"
+            :limit="1"
+            :data="ruleForm"
+            multiple>
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">毕设文件拖拽至此即可完成上传，或<em>点击上传</em></div>
+        </el-upload>
+      </el-form>
+    </div>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: "StudentMyTopic",
+  name: "StudentUploadThesis",
   created() {
     let e = sessionStorage.getItem('studentId');
     if (e == null) {
       this.$router.push('/login')
     }
     const _this = this
+    axios.get('http://localhost:8081/student/' + sessionStorage.getItem('studentId')).then(resp => {
+      _this.ruleForm.studentId = sessionStorage.getItem('studentId');
+      _this.ruleForm.topicId = resp.data.data.topicId;
+    })
     axios.get('http://localhost:8081/topic/student/My/' + sessionStorage.getItem('studentId')).then(resp => {
       if (resp.data.data == null) {
         _this.$message({
@@ -76,37 +75,50 @@ export default {
         topic.topicSource = '院系发布'
       }
       _this.topic = topic;
-      axios.get('http://localhost:8081/teacher/' + topic.teacherId).then(r => {
-        let teacherPage = r.data.data;
-        if (teacherPage.teacherPhone == 0) {
-          teacherPage.teacherPhone = '未填写'
-        }
-        if (teacherPage.teacherEmail == 0) {
-          teacherPage.teacherEmail = '未填写'
-        }
-        _this.teacher = teacherPage;
-      })
+      _this.thesis = topic.topicId;
     })
   },
   data() {
     return {
       topic: {},
-      teacher: {},
       ruleForm: {
         studentId: '',
         topicId: '',
         state: 0
       }
     }
+  },
+  methods: {
+    //调用的是表单中的:before-upload="beforeAvatarUpload"
+    beforeAvatarUpload(file) {
+      if ((file.size / 1024 / 1024) > 80) {
+        this.$message.error("上传的图片大小不能超过80MB");
+        return false;
+      }
+      return true;
+    },
+    uploadSuccess() {
+      this.$message({
+        type: 'success',
+        message: '文件上传成功'
+      });
+      this.$router.push('/StudentMyThesis')
+    },
+    uploadError() {
+      this.$message({
+        type: 'error',
+        message: '文件上传失败'
+      });
+    }
   }
 }
 </script>
 
 <style scoped>
-.StudentMyTopic {
+.StudentUploadThesis {
   background-color: rgb(217, 239, 239);
   width: 60%;
-  margin: 10px 0 0 180px;
+  margin: 60px 0 0 180px;
   border: 0.5px solid rgb(98, 159, 175);
   box-shadow: 0 5px 15px rgb(210, 210, 215);
   border-radius: 15px;
@@ -114,7 +126,7 @@ export default {
   color: rgb(69, 67, 142);
 }
 
-.StudentMyTopic table, th {
+.StudentUploadThesis table, th {
   text-align: left;
   border: 1px solid rgb(98, 159, 175);
   border-radius: 15px;
@@ -126,8 +138,9 @@ export default {
   background-color: rgb(212, 221, 254);
 }
 
-.table-two {
-  width: 100%;
-  background-color: rgb(201, 238, 232);
+.StudentUploadThesis .upload {
+  width: 360px;
+  margin: 0 auto;
+  padding: 10px;
 }
 </style>

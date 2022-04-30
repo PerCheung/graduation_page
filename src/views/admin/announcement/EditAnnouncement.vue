@@ -38,6 +38,10 @@
 export default {
   name: "EditAnnouncement",
   created() {
+    let e = sessionStorage.getItem('userId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     let _this = this;
     axios.get('http://localhost:8081/adminUser/' + this.$route.params.userId).then(function (resp) {
       _this.ruleForm.username = '此公告发布人：' + resp.data.data.username + resp.data.data.userTitle;

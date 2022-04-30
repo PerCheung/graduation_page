@@ -58,22 +58,14 @@
             </el-menu-item>
           </el-submenu>
           <el-submenu index="3">
-            <template slot="title"><i class="el-icon-user" style="color:#257b93"></i>任务书模块</template>
-            <el-menu-item index="/">
+            <template slot="title"><i class="el-icon-collection" style="color:#257b93"></i>论文模块</template>
+            <el-menu-item index="/Thesis">
               <div>
-                <i class="el-icon-s-custom"></i>任务书管理
+                <i class="el-icon-collection"></i>论文管理
               </div>
             </el-menu-item>
           </el-submenu>
           <el-submenu index="4">
-            <template slot="title"><i class="el-icon-user" style="color:#257b93"></i>论文模块</template>
-            <el-menu-item index="/">
-              <div>
-                <i class="el-icon-s-custom"></i>论文管理
-              </div>
-            </el-menu-item>
-          </el-submenu>
-          <el-submenu index="5">
             <template slot="title"><i class="el-icon-s-order" style="color:#257b93"></i>公告模块</template>
             <el-menu-item index="/Announcement">
               <div>
@@ -83,6 +75,14 @@
             <el-menu-item index="/AddAnnouncement">
               <div>
                 <i class="el-icon-circle-plus"></i>添加公告
+              </div>
+            </el-menu-item>
+          </el-submenu>
+          <el-submenu index="5">
+            <template slot="title"><i class="el-icon-discover" style="color:#257b93"></i>答辩模块</template>
+            <el-menu-item index="/AddReply">
+              <div>
+                <i class="el-icon-circle-plus"></i>添加答辩
               </div>
             </el-menu-item>
           </el-submenu>
@@ -126,6 +126,10 @@
 export default {
   name: 'Home',
   created() {
+    let e = sessionStorage.getItem('userId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this;
     axios.get('http://localhost:8081/adminUser/' + sessionStorage.getItem('userId')).then(function (resp) {
       _this.user = resp.data.data.username + resp.data.data.userTitle;

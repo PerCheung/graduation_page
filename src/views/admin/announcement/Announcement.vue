@@ -61,6 +61,10 @@
 export default {
   name: "Announcement",
   created() {
+    let e = sessionStorage.getItem('userId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this
     axios.get('http://localhost:8081/announcement?current=1&size=' + this.pageSize).then(function (resp) {
       _this.tableData = resp.data.data.records;

@@ -52,6 +52,12 @@
 <script>
 export default {
   name: "AddTeacher",
+  created() {
+    let e = sessionStorage.getItem('userId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
+  },
   data() {
     return {
       value: [],

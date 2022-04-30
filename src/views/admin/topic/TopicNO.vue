@@ -50,6 +50,10 @@
 export default {
   name: "TopicNO",
   created() {
+    let e = sessionStorage.getItem('userId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this
     axios.get('http://localhost:8081/topic/NO?current=1&size=' + this.pageSize).then(function (resp) {
       let topics = resp.data.data.records;

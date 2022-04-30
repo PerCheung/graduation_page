@@ -45,6 +45,10 @@
 export default {
   name: "DetailStudent",
   created() {
+    let e = sessionStorage.getItem('userId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this;
     axios.get('http://localhost:8081/student/' + this.$route.params.studentId).then(function (resp) {
       _this.ruleForm = resp.data.data;

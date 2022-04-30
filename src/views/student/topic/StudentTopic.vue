@@ -46,8 +46,12 @@
 export default {
   name: "StudentTopic",
   created() {
+    let e = sessionStorage.getItem('studentId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this
-    axios.get('http://localhost:8081/topic/Reviewed?current=1&size=' + this.pageSize).then(function (resp) {
+    axios.get('http://localhost:8081/topic/Reviewed/student?current=1&size=' + this.pageSize).then(function (resp) {
       let topics = resp.data.data.records;
       for (let topic of topics) {
         if (topic.topicType == 0) {
@@ -82,7 +86,7 @@ export default {
   methods: {
     page(currentPage) {
       const _this = this
-      axios.get('http://localhost:8081/topic/Reviewed?current=' + currentPage + '&size=' + this.pageSize).then(function (resp) {
+      axios.get('http://localhost:8081/topic/Reviewed/student?current=' + currentPage + '&size=' + this.pageSize).then(function (resp) {
         _this.tableData = resp.data.data.records;
         _this.total = resp.data.data.total;
       })

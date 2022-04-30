@@ -1,22 +1,23 @@
 <template>
-  <div class="StudentAnnouncement">
-    <el-table :data="tableData" :default-sort="{prop: 'createTime', order: 'descending'}">
+  <div class="AddReply">
+    <el-table :data="tableData">
       <el-table-column
-          prop="announcementTitle"
-          label="公告">
+          width="160px"
+          prop="studentId"
+          label="通过学生的学号">
       </el-table-column>
       <el-table-column
-          prop="createTime"
-          sortable
-          label="发布时间">
+          prop="thesisOriginal"
+          label="毕业论文名称">
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="200px">
         <template slot-scope="scope">
           <el-button
               size="mini"
-              type="success"
+              type="primary"
               plain
-              @click="detail(scope.$index, scope.row)">查看详情
+              icon="el-icon-c-scale-to-original"
+              @click="detail(scope.$index, scope.row)">分配答辩
           </el-button>
         </template>
       </el-table-column>
@@ -36,14 +37,14 @@
 
 <script>
 export default {
-  name: "StudentAnnouncement",
+  name: "AddReply",
   created() {
-    let e = sessionStorage.getItem('studentId');
+    let e = sessionStorage.getItem('userId');
     if (e == null) {
       this.$router.push('/login')
     }
     const _this = this
-    axios.get('http://localhost:8081/announcement?current=1&size=' + this.pageSize).then(function (resp) {
+    axios.get('http://localhost:8081/thesis/Reviewed/NoR?current=1&size=' + this.pageSize).then(resp => {
       _this.tableData = resp.data.data.records;
       _this.total = resp.data.data.total;
     })
@@ -51,13 +52,13 @@ export default {
   methods: {
     page(currentPage) {
       const _this = this
-      axios.get('http://localhost:8081/announcement?current=' + currentPage + '&size=' + this.pageSize).then(function (resp) {
+      axios.get('http://localhost:8081/thesis/Reviewed/NoR?current=' + currentPage + '&size=' + this.pageSize).then(resp => {
         _this.tableData = resp.data.data.records;
         _this.total = resp.data.data.total;
       })
     },
     detail(index, row) {
-      this.$router.push({name: '学生主页-公告详情', params: {announcementId: row.announcementId, userId: row.userId}})
+      this.$router.push({name: '分配答辩', params: {studentId: row.studentId}})
     }
   },
   data() {
@@ -72,9 +73,8 @@ export default {
 </script>
 
 <style scoped>
-.StudentAnnouncement {
+.AddReply {
   width: 95%;
   margin: 20px 0 0 20px;
-  height: 80%;
 }
 </style>

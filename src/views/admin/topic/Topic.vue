@@ -50,6 +50,10 @@
 export default {
   name: "Topic",
   created() {
+    let e = sessionStorage.getItem('userId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this
     axios.get('http://localhost:8081/topic?current=1&size=' + this.pageSize).then(function (resp) {
       let topics = resp.data.data.records;
@@ -74,7 +78,6 @@ export default {
         }
         if (topic.state == 1) {
           topic.state = '通过'
-          _this.flag = false
         }
         if (topic.state == 2) {
           topic.state = '不通过'

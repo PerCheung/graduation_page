@@ -33,6 +33,10 @@
 export default {
   name: "AdminSelf",
   created() {
+    let e = sessionStorage.getItem('userId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this;
     axios.get('http://localhost:8081/adminUser/' + sessionStorage.getItem('userId')).then(function (resp) {
       _this.ruleForm.username = resp.data.data.username;

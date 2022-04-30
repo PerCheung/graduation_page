@@ -12,6 +12,10 @@
 export default {
   name: "StudentDetailAnnouncement",
   created() {
+    let e = sessionStorage.getItem('studentId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     let _this = this;
     axios.get('http://localhost:8081/adminUser/' + this.$route.params.userId).then(function (resp) {
       _this.user = resp.data.data;

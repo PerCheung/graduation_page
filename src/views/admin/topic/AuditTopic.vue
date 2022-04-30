@@ -82,7 +82,7 @@ export default {
             } else {
               this.$message({
                 type: 'error',
-                message: '审核完成'
+                message: '审核失败'
               });
             }
           })
@@ -103,7 +103,7 @@ export default {
           } else {
             this.$message({
               type: 'error',
-              message: '审核完成'
+              message: '审核失败'
             });
           }
         })
@@ -111,6 +111,10 @@ export default {
     }
   },
   created() {
+    let e = sessionStorage.getItem('userId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this
     axios.get('http://localhost:8081/topic/' + this.$route.params.topicId).then(function (resp) {
       let topic = resp.data.data;

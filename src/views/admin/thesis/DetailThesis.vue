@@ -1,5 +1,5 @@
 <template>
-  <div class=StudentChooseTopic>
+  <div class="DetailThesis">
     <table class="table-one">
       <tr>
         <td>课题名称：{{ topic.topicName }}</td>
@@ -17,6 +17,29 @@
     <br>
     <table class="table-two">
       <tr>
+        <td>学生：{{ student.studentName }}</td>
+        <td>学生性别：{{ student.sex }}</td>
+      </tr>
+      <tr>
+        <td>学生所在学院：{{ student.studentCollege }}</td>
+        <td>学生学号：{{ student.studentId }}</td>
+      </tr>
+      <tr>
+        <td>学生联系电话：{{ student.studentPhone }}</td>
+        <td>学生所属专业：{{ student.studentMajor }}</td>
+      </tr>
+      <tr>
+        <td>学生联系邮箱：{{ student.studentEmail }}</td>
+        <td>学生论文：
+          <el-button type="primary" size="mini"
+                     @click="download" icon="el-icon-share">下载查看
+          </el-button>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <table class="table-two">
+      <tr>
         <td>课题创建教师：{{ teacher.teacherName }}</td>
         <td>教师性别：{{ teacher.sex }}</td>
       </tr>
@@ -29,70 +52,33 @@
         <td>教师所属专业：{{ teacher.teacherMajor }}</td>
       </tr>
       <tr>
-        <td>教师编号：{{ teacher.teacherId }}</td>
+        <td>教师工号：{{ teacher.teacherId }}</td>
         <td>教师联系邮箱：{{ teacher.teacherEmail }}</td>
       </tr>
     </table>
-    <br>
-    <table>
-      <tr>
-        <td>{{ topic.topicMain }}</td>
-      </tr>
-    </table>
-    <br>
-    <div style="display: block;text-align: center">
-      <el-button type="success" @click="audit">选择当前课题</el-button>
-    </div>
   </div>
-
 </template>
 
 <script>
+
 export default {
-  name: "StudentChooseTopic",
-  methods: {
-    audit() {
-      this.$confirm('确认选择此课题吗？', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'success'
-      }).then(() => {
-        const _this = this;
-        let StudentTopicVO = {
-          studentId: sessionStorage.getItem('studentId'),
-          topicId: _this.topic.topicId,
-          teacherId: _this.teacher.teacherId
-        }
-        axios.put('http://localhost:8081/topic/student', StudentTopicVO).then(resp => {
-          if (resp.data.data == true) {
-            this.$message({
-              type: 'success',
-              message: '选择成功！'
-            });
-            this.$router.push('/StudentMyTopic')
-          }
-        }).catch(error => {
-          this.$message({
-            type: 'error',
-            message: '选择失败'
-          });
-          console.log(error)  //接口请求1分钟还是没有响应，则会停止响应
-        }, 1000 * 60)
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消操作'
-        });
-      });
-    }
-  },
+  name: "DetailThesis",
   created() {
-    let e = sessionStorage.getItem('studentId');
+    let e = sessionStorage.getItem('userId');
     if (e == null) {
       this.$router.push('/login')
     }
     const _this = this
-    axios.get('http://localhost:8081/topic/' + this.$route.params.topicId).then(function (resp) {
+    axios.get('http://localhost:8081/thesis/' + this.$route.params.studentId).then(resp => {
+      _this.thesis = resp.data.data
+    })
+    axios.get('http://localhost:8081/topic/student/My/' + this.$route.params.studentId).then(resp => {
+      if (resp.data.data == null) {
+        _this.$message({
+          type: 'error',
+          message: '你尚未选择课题'
+        });
+      }
       let topic = resp.data.data;
       if (topic.topicType == 0) {
         topic.topicType = '其他'
@@ -110,7 +96,17 @@ export default {
         topic.topicSource = '院系发布'
       }
       _this.topic = topic;
-      axios.get('http://localhost:8081/teacher/' + topic.teacherId).then(function (r) {
+      axios.get('http://localhost:8081/student/' + topic.studentId).then(r => {
+        let studentPage = r.data.data;
+        if (studentPage.studentPhone == 0) {
+          studentPage.studentPhone = '未填写'
+        }
+        if (studentPage.studentEmail == 0) {
+          studentPage.studentEmail = '未填写'
+        }
+        _this.student = studentPage;
+      })
+      axios.get('http://localhost:8081/teacher/' + topic.teacherId).then(r => {
         let teacherPage = r.data.data;
         if (teacherPage.teacherPhone == 0) {
           teacherPage.teacherPhone = '未填写'
@@ -125,17 +121,29 @@ export default {
   data() {
     return {
       topic: {},
-      teacher: {}
+      student: {},
+      thesis: {},
+      teacher: {},
+      ruleForm: {
+        studentId: '',
+        topicId: '',
+        state: 0
+      }
+    }
+  },
+  methods: {
+    download() {
+      window.open('http://localhost:8081/thesis/download/' + this.thesis.thesisName)
     }
   }
 }
 </script>
 
 <style scoped>
-.StudentChooseTopic {
+.DetailThesis {
   background-color: rgb(217, 239, 239);
   width: 60%;
-  margin: 10px 0 0 180px;
+  margin: 30px 0 0 180px;
   border: 0.5px solid rgb(98, 159, 175);
   box-shadow: 0 5px 15px rgb(210, 210, 215);
   border-radius: 15px;
@@ -143,7 +151,7 @@ export default {
   color: rgb(69, 67, 142);
 }
 
-.StudentChooseTopic table, th {
+.DetailThesis table, th {
   text-align: left;
   border: 1px solid rgb(98, 159, 175);
   border-radius: 15px;

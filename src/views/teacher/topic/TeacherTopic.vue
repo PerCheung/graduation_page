@@ -73,6 +73,10 @@
 export default {
   name: "TeacherTopic",
   created() {
+    let e = sessionStorage.getItem('teacherId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this
     axios.get('http://localhost:8081/topic/teacher?current=1&size=' + this.pageSize + '&teacherId=' + sessionStorage.getItem('teacherId')).then(function (resp) {
       let topics = resp.data.data.records;

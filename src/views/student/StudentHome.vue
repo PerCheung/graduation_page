@@ -10,7 +10,27 @@
         <el-menu class="home_menu" router background-color="#c8ede5" text-color="#176175" active-text-color="#f88f3d">
           <el-menu-item index="/StudentTopic">
             <div>
-              <i class="el-icon-tickets"></i>查看已发布课题
+              <i class="el-icon-document"></i>未被选择的课题
+            </div>
+          </el-menu-item>
+          <el-menu-item index="/StudentMyTopic">
+            <div>
+              <i class="el-icon-tickets"></i>我的课题
+            </div>
+          </el-menu-item>
+          <el-menu-item index="/StudentUploadThesis">
+            <div>
+              <i class="el-icon-upload"></i>上传毕设
+            </div>
+          </el-menu-item>
+          <el-menu-item index="/StudentMyThesis">
+            <div>
+              <i class="el-icon-collection"></i>我的毕设
+            </div>
+          </el-menu-item>
+          <el-menu-item index="/StudentMyReply">
+            <div>
+              <i class="el-icon-discover"></i>我的答辩
             </div>
           </el-menu-item>
           <el-menu-item index="/StudentAnnouncement">
@@ -58,6 +78,10 @@
 export default {
   name: "StudentHome",
   created() {
+    let e = sessionStorage.getItem('studentId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this;
     axios.get('http://localhost:8081/student/' + sessionStorage.getItem('studentId')).then(function (resp) {
       _this.user = resp.data.data.studentName;

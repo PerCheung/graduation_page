@@ -25,6 +25,12 @@
 <script>
 export default {
   name: "StudentChange",
+  created() {
+    let e = sessionStorage.getItem('studentId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
+  },
   data() {
     let validatePass = (rule, value, callback) => {
       if (value !== this.ruleForm.newPassword) {

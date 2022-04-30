@@ -39,6 +39,17 @@ import TeacherDetailTopic from "../views/teacher/topic/TeacherDetailTopic"
 import StudentTopic from "../views/student/topic/StudentTopic"
 import StudentChooseTopic from "../views/student/topic/StudentChooseTopic"
 import StudentMyTopic from "../views/student/topic/StudentMyTopic"
+import TeacherMyStudent from "../views/teacher/student/TeacherMyStudent"
+import StudentUploadThesis from "../views/student/thesis/StudentUploadThesis"
+import StudentMyThesis from "../views/student/thesis/StudentMyThesis"
+import TeacherDetailStudent from "../views/teacher/student/TeacherDetailStudent"
+import Thesis from "../views/admin/thesis/Thesis"
+import DetailThesis from "../views/admin/thesis/DetailThesis"
+import AddReply from "../views/admin/reply/AddReply"
+import DistributeReply from "../views/admin/reply/DistributeReply"
+import TeacherReply from "../views/teacher/reply/TeacherReply"
+import TeacherDetailReply from "../views/teacher/reply/TeacherDetailReply";
+import StudentMyReply from "../views/student/reply/StudentMyReply"
 
 Vue.use(VueRouter)
 
@@ -136,6 +147,22 @@ const routes = [
                 path: '/TopicReviewed',
                 name: '查看已通过课题',
                 component: TopicReviewed
+            }, {
+                path: '/Thesis',
+                name: '论文管理',
+                component: Thesis
+            }, {
+                path: '/DetailThesis',
+                name: '论文详情',
+                component: DetailThesis
+            }, {
+                path: '/AddReply',
+                name: '添加答辩',
+                component: AddReply
+            }, {
+                path: '/DistributeReply',
+                name: '分配答辩',
+                component: DistributeReply
             }
         ]
     },
@@ -179,6 +206,22 @@ const routes = [
                 path: '/TeacherDetailTopic',
                 name: '教师主页-课题详情',
                 component: TeacherDetailTopic
+            }, {
+                path: '/TeacherMyStudent',
+                name: '教师主页-我的学生',
+                component: TeacherMyStudent
+            }, {
+                path: '/TeacherDetailStudent',
+                name: '教师主页-学生详情',
+                component: TeacherDetailStudent
+            }, {
+                path: '/TeacherReply',
+                name: '教师主页-答辩管理',
+                component: TeacherReply
+            }, {
+                path: '/TeacherDetailReply',
+                name: '教师主页-答辩打分',
+                component: TeacherDetailReply
             }
         ]
     },
@@ -209,7 +252,7 @@ const routes = [
                 component: StudentDetailAnnouncement
             }, {
                 path: '/StudentTopic',
-                name: '学生主页-查看已发布课题',
+                name: '学生主页-未被选择的课题',
                 component: StudentTopic
             }, {
                 path: '/StudentChooseTopic',
@@ -219,6 +262,18 @@ const routes = [
                 path: '/StudentMyTopic',
                 name: '学生主页-我的课题',
                 component: StudentMyTopic
+            }, {
+                path: '/StudentUploadThesis',
+                name: '学生主页-上传毕设',
+                component: StudentUploadThesis
+            }, {
+                path: '/StudentMyThesis',
+                name: '学生主页-我的毕设',
+                component: StudentMyThesis
+            }, {
+                path: '/StudentMyReply',
+                name: '学生主页-我的答辩',
+                component: StudentMyReply
             }
         ]
     },

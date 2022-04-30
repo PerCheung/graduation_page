@@ -1,5 +1,5 @@
 <template>
-  <div class=StudentMyTopic>
+  <div class="TeacherDetailReply">
     <table class="table-one">
       <tr>
         <td>课题名称：{{ topic.topicName }}</td>
@@ -12,6 +12,29 @@
       <tr>
         <td>课题类型：{{ topic.topicType }}</td>
         <td>课题上次修改时间：{{ topic.updateTime }}</td>
+      </tr>
+    </table>
+    <br>
+    <table class="table-two">
+      <tr>
+        <td>学生：{{ student.studentName }}</td>
+        <td>学生性别：{{ student.sex }}</td>
+      </tr>
+      <tr>
+        <td>学生所在学院：{{ student.studentCollege }}</td>
+        <td>学生学号：{{ student.studentId }}</td>
+      </tr>
+      <tr>
+        <td>学生联系电话：{{ student.studentPhone }}</td>
+        <td>学生所属专业：{{ student.studentMajor }}</td>
+      </tr>
+      <tr>
+        <td>学生联系邮箱：{{ student.studentEmail }}</td>
+        <td>学生论文：
+          <el-button type="primary" size="mini"
+                     @click="download" icon="el-icon-share">下载查看
+          </el-button>
+        </td>
       </tr>
     </table>
     <br>
@@ -34,25 +57,34 @@
       </tr>
     </table>
     <br>
-    <table>
-      <tr>
-        <td>{{ topic.topicMain }}</td>
-      </tr>
-    </table>
+    <div style="width:300px;margin:0 auto">
+      <el-slider v-model="reply.score"></el-slider>
+      <h1 style="text-align:center">该学生得分：{{ reply.score }}</h1><br>
+      <el-button type="primary"
+                 icon="el-icon-s-check"
+                 style="display:block;margin:0 auto"
+                 @click="score"
+      >提交分数
+      </el-button>
+    </div>
+
   </div>
 </template>
 
 <script>
 
 export default {
-  name: "StudentMyTopic",
+  name: "TeacherDetailReply",
   created() {
-    let e = sessionStorage.getItem('studentId');
+    let e = sessionStorage.getItem('teacherId');
     if (e == null) {
       this.$router.push('/login')
     }
     const _this = this
-    axios.get('http://localhost:8081/topic/student/My/' + sessionStorage.getItem('studentId')).then(resp => {
+    axios.get('http://localhost:8081/thesis/' + this.$route.params.studentId).then(resp => {
+      _this.thesis = resp.data.data
+    })
+    axios.get('http://localhost:8081/topic/student/My/' + this.$route.params.studentId).then(resp => {
       if (resp.data.data == null) {
         _this.$message({
           type: 'error',
@@ -76,6 +108,16 @@ export default {
         topic.topicSource = '院系发布'
       }
       _this.topic = topic;
+      axios.get('http://localhost:8081/student/' + topic.studentId).then(r => {
+        let studentPage = r.data.data;
+        if (studentPage.studentPhone == 0) {
+          studentPage.studentPhone = '未填写'
+        }
+        if (studentPage.studentEmail == 0) {
+          studentPage.studentEmail = '未填写'
+        }
+        _this.student = studentPage;
+      })
       axios.get('http://localhost:8081/teacher/' + topic.teacherId).then(r => {
         let teacherPage = r.data.data;
         if (teacherPage.teacherPhone == 0) {
@@ -91,19 +133,41 @@ export default {
   data() {
     return {
       topic: {},
+      student: {},
+      thesis: {},
       teacher: {},
-      ruleForm: {
-        studentId: '',
-        topicId: '',
-        state: 0
+      reply: {
+        score: 0
       }
+    }
+  },
+  methods: {
+    download() {
+      window.open('http://localhost:8081/thesis/download/' + this.thesis.thesisName)
+    },
+    score() {
+      let reply = {studentId: this.student.studentId, score: this.reply.score}
+      axios.put('http://localhost:8081/reply', reply).then(resp => {
+        if (resp.data.data == true) {
+          this.$message({
+            type: 'success',
+            message: '打分成功'
+          });
+          this.$router.push('/TeacherReply')
+        }
+      }).catch(error => {
+        this.$message({
+          type: 'error',
+          message: '打分失败'
+        });
+      }, 1000 * 60)
     }
   }
 }
 </script>
 
 <style scoped>
-.StudentMyTopic {
+.TeacherDetailReply {
   background-color: rgb(217, 239, 239);
   width: 60%;
   margin: 10px 0 0 180px;
@@ -114,7 +178,7 @@ export default {
   color: rgb(69, 67, 142);
 }
 
-.StudentMyTopic table, th {
+.TeacherDetailReply table, th {
   text-align: left;
   border: 1px solid rgb(98, 159, 175);
   border-radius: 15px;

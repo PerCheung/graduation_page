@@ -21,6 +21,16 @@
               </div>
             </el-menu-item>
           </el-submenu>
+          <el-menu-item index="/TeacherMyStudent">
+            <div>
+              <i class="el-icon-user"></i>我的学生
+            </div>
+          </el-menu-item>
+          <el-menu-item index="/TeacherReply">
+            <div>
+              <i class="el-icon-discover"></i>答辩管理
+            </div>
+          </el-menu-item>
           <el-menu-item index="/TeacherAnnouncement">
             <div>
               <i class="el-icon-s-order"></i>查看公告
@@ -66,6 +76,10 @@
 export default {
   name: "TeacherHome",
   created() {
+    let e = sessionStorage.getItem('teacherId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this;
     axios.get('http://localhost:8081/teacher/' + sessionStorage.getItem('teacherId')).then(function (resp) {
       _this.user = resp.data.data.teacherName;

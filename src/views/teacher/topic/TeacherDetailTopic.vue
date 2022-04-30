@@ -35,9 +35,7 @@
     </table>
     <br>
     <table>
-      <tr>
         <td>{{ topic.topicMain }}</td>
-      </tr>
     </table>
   </div>
 </template>
@@ -46,6 +44,10 @@
 export default {
   name: "TeacherDetailTopic",
   created() {
+    let e = sessionStorage.getItem('teacherId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
     const _this = this
     axios.get('http://localhost:8081/topic/' + this.$route.params.topicId).then(function (resp) {
       let topic = resp.data.data;

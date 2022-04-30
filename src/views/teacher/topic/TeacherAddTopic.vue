@@ -39,6 +39,12 @@
 <script>
 export default {
   name: "TeacherAddTopic",
+  created() {
+    let e = sessionStorage.getItem('teacherId');
+    if (e == null) {
+      this.$router.push('/login')
+    }
+  },
   data() {
     return {
       ruleForm: {
