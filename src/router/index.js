@@ -53,246 +53,110 @@ import StudentMyReply from "../views/student/reply/StudentMyReply"
 
 Vue.use(VueRouter)
 
-const routes = [
-    {
-        path: '/',
-        name: '主页',
-        component: Home,
-        children: [
-            {
-                path: '/change',
-                name: '修改密码',
-                component: Change
-            },
-            {
-                path: '/self',
-                name: '个人信息管理',
-                component: AdminSelf
-            },
-            {
-                path: '/AddTeacher',
-                name: '添加教师',
-                component: AddTeacher
-            },
-            {
-                path: '/Teacher',
-                name: '教师管理',
-                component: Teacher
-            }, {
-                path: '/EditTeacher',
-                name: '编辑教师信息',
-                component: EditTeacher
-            }
-            , {
-                path: '/DetailTeacher',
-                name: '教师详情',
-                component: DetailTeacher
-            },
-            {
-                path: '/AddStudent',
-                name: '添加学生',
-                component: AddStudent
-            }, {
-                path: '/EditStudent',
-                name: '编辑学生信息',
-                component: EditStudent
-            }, {
-                path: '/Student',
-                name: '学生管理',
-                component: Student
-            },
-            {
-                path: '/DetailStudent',
-                name: '学生详情',
-                component: DetailStudent
-            },
-            {
-                path: '/AddAnnouncement',
-                name: '添加公告',
-                component: AddAnnouncement
-            },
-            {
-                path: '/Announcement',
-                name: '公告管理',
-                component: Announcement
-            },
-            {
-                path: '/EditAnnouncement',
-                name: '修改公告',
-                component: EditAnnouncement
-            },
-            {
-                path: '/DetailAnnouncement',
-                name: '公告详情',
-                component: DetailAnnouncement
-            },
-            {
-                path: '/Topic',
-                name: '课题管理',
-                component: Topic
-            },
-            {
-                path: '/TopicNotReviewed',
-                name: '查看未审核课题',
-                component: TopicNotReviewed
-            }, {
-                path: '/TopicNO',
-                name: '查看未通过课题',
-                component: TopicNO
-            }, {
-                path: '/AuditTopic',
-                name: '审核课题',
-                component: AuditTopic
-            }, {
-                path: '/TopicReviewed',
-                name: '查看已通过课题',
-                component: TopicReviewed
-            }, {
-                path: '/Thesis',
-                name: '论文管理',
-                component: Thesis
-            }, {
-                path: '/DetailThesis',
-                name: '论文详情',
-                component: DetailThesis
-            }, {
-                path: '/AddReply',
-                name: '添加答辩',
-                component: AddReply
-            }, {
-                path: '/DistributeReply',
-                name: '分配答辩',
-                component: DistributeReply
-            }
-        ]
-    },
-    {
-        path: '/teacherHome',
-        name: '教师主页',
-        component: TeacherHome,
-        children: [
-            {
-                path: '/TeacherTeacherSelf',
-                name: '教师主页-个人信息管理',
-                component: TeacherTeacherSelf
-            },
-            {
-                path: '/TeacherChange',
-                name: '教师主页-密码修改',
-                component: TeacherChange
-            },
-            {
-                path: '/TeacherAnnouncement',
-                name: '教师主页-查看公告',
-                component: TeacherAnnouncement
-            },
-            {
-                path: '/TeacherDetailAnnouncement',
-                name: '教师主页-公告详情',
-                component: TeacherDetailAnnouncement
-            }, {
-                path: '/TeacherAddTopic',
-                name: '教师主页-添加课题',
-                component: TeacherAddTopic
-            }, {
-                path: '/TeacherTopic',
-                name: '教师主页-课题管理',
-                component: TeacherTopic
-            }, {
-                path: '/TeacherEditTopic',
-                name: '教师主页-课题编辑',
-                component: TeacherEditTopic
-            }, {
-                path: '/TeacherDetailTopic',
-                name: '教师主页-课题详情',
-                component: TeacherDetailTopic
-            }, {
-                path: '/TeacherMyStudent',
-                name: '教师主页-我的学生',
-                component: TeacherMyStudent
-            }, {
-                path: '/TeacherDetailStudent',
-                name: '教师主页-学生详情',
-                component: TeacherDetailStudent
-            }, {
-                path: '/TeacherReply',
-                name: '教师主页-答辩管理',
-                component: TeacherReply
-            }, {
-                path: '/TeacherDetailReply',
-                name: '教师主页-答辩打分',
-                component: TeacherDetailReply
-            }
-        ]
-    },
-    {
-        path: '/studentHome',
-        name: '学生主页',
-        component: StudentHome,
-        children: [
-            {
-                path: '/StudentStudentSelf',
-                name: '学生主页-个人信息管理',
-                component: StudentStudentSelf
-            }
-            ,
-            {
-                path: '/StudentChange',
-                name: '学生主页-密码修改',
-                component: StudentChange
-            },
-            {
-                path: '/StudentAnnouncement',
-                name: '学生主页-查看公告',
-                component: StudentAnnouncement
-            },
-            {
-                path: '/StudentDetailAnnouncement',
-                name: '学生主页-公告详情',
-                component: StudentDetailAnnouncement
-            }, {
-                path: '/StudentTopic',
-                name: '学生主页-未被选择的课题',
-                component: StudentTopic
-            }, {
-                path: '/StudentChooseTopic',
-                name: '学生主页-选择课题',
-                component: StudentChooseTopic
-            }, {
-                path: '/StudentMyTopic',
-                name: '学生主页-我的课题',
-                component: StudentMyTopic
-            }, {
-                path: '/StudentUploadThesis',
-                name: '学生主页-上传毕设',
-                component: StudentUploadThesis
-            }, {
-                path: '/StudentMyThesis',
-                name: '学生主页-我的毕设',
-                component: StudentMyThesis
-            }, {
-                path: '/StudentMyReply',
-                name: '学生主页-我的答辩',
-                component: StudentMyReply
-            }
-        ]
-    },
-    {
-        path: '/login',
-        name: '登录',
-        component: Login
-    },
-    {
-        path: '/reg',
-        name: '管理员注册',
-        component: Reg
-    }
-]
+const routes = [{
+    path: '/', name: '主页', component: Home, children: [{
+        path: '/change', name: '修改密码', component: Change
+    }, {
+        path: '/self', name: '个人信息管理', component: AdminSelf
+    }, {
+        path: '/AddTeacher', name: '添加教师', component: AddTeacher
+    }, {
+        path: '/Teacher', name: '教师管理', component: Teacher
+    }, {
+        path: '/EditTeacher', name: '编辑教师信息', component: EditTeacher
+    }, {
+        path: '/DetailTeacher', name: '教师详情', component: DetailTeacher
+    }, {
+        path: '/AddStudent', name: '添加学生', component: AddStudent
+    }, {
+        path: '/EditStudent', name: '编辑学生信息', component: EditStudent
+    }, {
+        path: '/Student', name: '学生管理', component: Student
+    }, {
+        path: '/DetailStudent', name: '学生详情', component: DetailStudent
+    }, {
+        path: '/AddAnnouncement', name: '添加公告', component: AddAnnouncement
+    }, {
+        path: '/Announcement', name: '公告管理', component: Announcement
+    }, {
+        path: '/EditAnnouncement', name: '修改公告', component: EditAnnouncement
+    }, {
+        path: '/DetailAnnouncement', name: '公告详情', component: DetailAnnouncement
+    }, {
+        path: '/Topic', name: '课题管理', component: Topic
+    }, {
+        path: '/TopicNotReviewed', name: '查看未审核课题', component: TopicNotReviewed
+    }, {
+        path: '/TopicNO', name: '查看未通过课题', component: TopicNO
+    }, {
+        path: '/AuditTopic', name: '审核课题', component: AuditTopic
+    }, {
+        path: '/TopicReviewed', name: '查看已通过课题', component: TopicReviewed
+    }, {
+        path: '/Thesis', name: '论文管理', component: Thesis
+    }, {
+        path: '/DetailThesis', name: '论文详情', component: DetailThesis
+    }, {
+        path: '/AddReply', name: '添加答辩', component: AddReply
+    }, {
+        path: '/DistributeReply', name: '分配答辩', component: DistributeReply
+    }]
+}, {
+    path: '/teacherHome', name: '教师主页', component: TeacherHome, children: [{
+        path: '/TeacherTeacherSelf', name: '教师主页-个人信息管理', component: TeacherTeacherSelf
+    }, {
+        path: '/TeacherChange', name: '教师主页-密码修改', component: TeacherChange
+    }, {
+        path: '/TeacherAnnouncement', name: '教师主页-查看公告', component: TeacherAnnouncement
+    }, {
+        path: '/TeacherDetailAnnouncement', name: '教师主页-公告详情', component: TeacherDetailAnnouncement
+    }, {
+        path: '/TeacherAddTopic', name: '教师主页-添加课题', component: TeacherAddTopic
+    }, {
+        path: '/TeacherTopic', name: '教师主页-课题管理', component: TeacherTopic
+    }, {
+        path: '/TeacherEditTopic', name: '教师主页-课题编辑', component: TeacherEditTopic
+    }, {
+        path: '/TeacherDetailTopic', name: '教师主页-课题详情', component: TeacherDetailTopic
+    }, {
+        path: '/TeacherMyStudent', name: '教师主页-我的学生', component: TeacherMyStudent
+    }, {
+        path: '/TeacherDetailStudent', name: '教师主页-学生详情', component: TeacherDetailStudent
+    }, {
+        path: '/TeacherReply', name: '教师主页-答辩管理', component: TeacherReply
+    }, {
+        path: '/TeacherDetailReply', name: '教师主页-答辩打分', component: TeacherDetailReply
+    }]
+}, {
+    path: '/studentHome', name: '学生主页', component: StudentHome, children: [{
+        path: '/StudentStudentSelf', name: '学生主页-个人信息管理', component: StudentStudentSelf
+    }, {
+        path: '/StudentChange', name: '学生主页-密码修改', component: StudentChange
+    }, {
+        path: '/StudentAnnouncement', name: '学生主页-查看公告', component: StudentAnnouncement
+    }, {
+        path: '/StudentDetailAnnouncement', name: '学生主页-公告详情', component: StudentDetailAnnouncement
+    }, {
+        path: '/StudentTopic', name: '学生主页-未被选择的课题', component: StudentTopic
+    }, {
+        path: '/StudentChooseTopic', name: '学生主页-选择课题', component: StudentChooseTopic
+    }, {
+        path: '/StudentMyTopic', name: '学生主页-我的课题', component: StudentMyTopic
+    }, {
+        path: '/StudentUploadThesis', name: '学生主页-上传毕设', component: StudentUploadThesis
+    }, {
+        path: '/StudentMyThesis', name: '学生主页-我的毕设', component: StudentMyThesis
+    }, {
+        path: '/StudentMyReply', name: '学生主页-我的答辩', component: StudentMyReply
+    }]
+}, {
+    path: '/login', name: '登录', component: Login
+}, {
+    path: '/reg', name: '管理员注册', component: Reg
+}]
 
 const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes
+    mode: 'history', base: process.env.BASE_URL, routes
 })
 
 export default router
