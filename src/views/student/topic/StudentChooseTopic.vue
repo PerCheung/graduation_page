@@ -70,6 +70,11 @@ export default {
               message: '选择成功！'
             });
             this.$router.push('/StudentMyTopic')
+          } else {
+            this.$message({
+              type: 'info',
+              message: resp.data.data
+            });
           }
         }).catch(error => {
           this.$message({
