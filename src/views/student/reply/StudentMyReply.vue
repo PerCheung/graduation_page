@@ -21,12 +21,14 @@
       <el-timeline-item size="large" icon="el-icon-thumb" color="#0bbd87" :timestamp="thesis.updateTime"
                         placement="top">
         <el-card>
-          <h1>你最后一次在{{ thesis.updateTime }}提交了你的毕业设计论文</h1>
+          <h1>你最后一次在{{ thesis.updateTime }}提交了你的毕业设计论文，你的导师{{ teacher.teacherName }}最终为你打分{{ thesis.score }}</h1>
         </el-card>
       </el-timeline-item>
       <el-timeline-item size="large" color="#0bbd87" icon="el-icon-check" :timestamp="reply.updateTime" placement="top">
         <el-card>
-          <h1>你的论文最终由{{ scoreTeacher.teacherName }}老师为你打分，你的最终成绩为{{ reply.score }}！</h1>
+          <h1>你的论文最终由{{ scoreTeacher.teacherName }}老师为你打分，你的答辩成绩为{{
+              reply.score
+            }}，你的最终成绩为{{ reply.score * 0.4 + thesis.score * 0.6 }}！</h1>
         </el-card>
       </el-timeline-item>
     </el-timeline>

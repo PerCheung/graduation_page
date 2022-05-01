@@ -18,6 +18,11 @@
               <i class="el-icon-tickets"></i>我的课题
             </div>
           </el-menu-item>
+          <el-menu-item index="/StudentUploadDocumentation">
+            <div>
+              <i class="el-icon-folder-opened"></i>提交过程文档
+            </div>
+          </el-menu-item>
           <el-menu-item index="/StudentUploadThesis">
             <div>
               <i class="el-icon-upload"></i>上传毕设

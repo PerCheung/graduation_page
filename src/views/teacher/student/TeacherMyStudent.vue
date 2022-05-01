@@ -71,7 +71,7 @@ export default {
       })
     },
     detail(index, row) {
-      this.$router.push({name: '教师主页-学生详情', params: {studentId: row.studentId}})
+      this.$router.push({name: '教师主页-学生指导审核', params: {studentId: row.studentId}})
     }
   },
   data() {

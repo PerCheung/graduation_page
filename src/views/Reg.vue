@@ -54,6 +54,7 @@
         </el-form>
       </div>
     </el-main>
+    <!--    <el-footer class="home_footer"></el-footer>-->
     <el-footer class="reg-footer">
       Copyright © 2022 Peter Cheung 保留所有权利。
     </el-footer>

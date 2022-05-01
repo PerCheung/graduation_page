@@ -30,6 +30,13 @@
       </tr>
       <tr>
         <td>学生联系邮箱：{{ student.studentEmail }}</td>
+        <td>学生过程文档：
+          <el-button type="info" size="mini"
+                     @click="downloadDocumentation" icon="el-icon-share">下载查看
+          </el-button>
+        </td>
+      </tr>
+      <tr>
         <td>学生论文：
           <el-button type="primary" size="mini"
                      @click="download" icon="el-icon-share">下载查看
@@ -38,21 +45,25 @@
       </tr>
     </table>
     <br>
+    <div style="width:300px;margin:0 auto">
+      <el-slider v-model="thesis.score"></el-slider>
+      <h1 style="text-align:center">该学生得分：{{ thesis.score }}</h1><br>
+    </div>
     <div>
       <el-switch
           style="display: block;text-align: center;"
           v-model="thesis.state"
           active-color="#13ce66"
           inactive-color="#ff4949"
-          active-text="毕设初步审核通过"
-          inactive-text="毕设审核不通过"
+          active-text="审核通过"
+          inactive-text="审核不通过"
           active-value="1"
           inactive-value="2"
       >
       </el-switch>
       <br>
       <div style="display: block;text-align: center">
-        <el-button type="success" @click="audit">向管理员提交审核</el-button>
+        <el-button type="success" @click="audit">提交审核</el-button>
       </div>
     </div>
   </div>
@@ -68,6 +79,9 @@ export default {
       this.$router.push('/login')
     }
     const _this = this
+    axios.get('http://localhost:8081/documentation/' + this.$route.params.studentId).then(resp => {
+      _this.documentation = resp.data.data
+    })
     axios.get('http://localhost:8081/thesis/' + this.$route.params.studentId).then(resp => {
       if (resp.data.data != null) {
         _this.thesis = resp.data.data
@@ -122,6 +136,7 @@ export default {
       topic: {},
       student: {},
       thesis: {},
+      documentation: {},
       ruleForm: {
         studentId: '',
         topicId: '',
@@ -133,10 +148,13 @@ export default {
     download() {
       window.open('http://localhost:8081/thesis/download/' + this.thesis.thesisName)
     },
+    downloadDocumentation() {
+      window.open('http://localhost:8081/documentation/download/' + this.documentation.documentationName)
+    },
     audit() {
-      let thesis = {studentId: this.thesis.studentId, state: this.thesis.state}
+      let thesis = {studentId: this.thesis.studentId, state: this.thesis.state, score: this.thesis.score}
       if (thesis.state == 2) {
-        this.$confirm('确认要不通过此课题吗？', '警告', {
+        this.$confirm('确认要此学生不通过吗？', '警告', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'error'

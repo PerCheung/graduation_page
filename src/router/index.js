@@ -50,6 +50,7 @@ import DistributeReply from "../views/admin/reply/DistributeReply"
 import TeacherReply from "../views/teacher/reply/TeacherReply"
 import TeacherDetailReply from "../views/teacher/reply/TeacherDetailReply";
 import StudentMyReply from "../views/student/reply/StudentMyReply"
+import StudentUploadDocumentation from "../views/student/documentation/StudentUploadDocumentation"
 
 Vue.use(VueRouter)
 
@@ -121,7 +122,7 @@ const routes = [{
     }, {
         path: '/TeacherMyStudent', name: '教师主页-我的学生', component: TeacherMyStudent
     }, {
-        path: '/TeacherDetailStudent', name: '教师主页-学生详情', component: TeacherDetailStudent
+        path: '/TeacherDetailStudent', name: '教师主页-学生指导审核', component: TeacherDetailStudent
     }, {
         path: '/TeacherReply', name: '教师主页-答辩管理', component: TeacherReply
     }, {
@@ -142,6 +143,8 @@ const routes = [{
         path: '/StudentChooseTopic', name: '学生主页-选择课题', component: StudentChooseTopic
     }, {
         path: '/StudentMyTopic', name: '学生主页-我的课题', component: StudentMyTopic
+    }, {
+        path: '/StudentUploadDocumentation', name: '学生主页-上传过程文档', component: StudentUploadDocumentation
     }, {
         path: '/StudentUploadThesis', name: '学生主页-上传毕设', component: StudentUploadThesis
     }, {
