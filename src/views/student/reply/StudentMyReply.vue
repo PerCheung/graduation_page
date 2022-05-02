@@ -26,7 +26,7 @@
       </el-timeline-item>
       <el-timeline-item size="large" color="#0bbd87" icon="el-icon-check" :timestamp="reply.updateTime" placement="top">
         <el-card>
-          <h1>你的论文最终由{{ scoreTeacher.teacherName }}老师为你打分，你的答辩成绩为{{
+          <h1>你的答辩最终由{{ scoreTeacher.teacherName }}老师为你打分，你的答辩成绩为{{
               reply.score
             }}，你的最终成绩为{{ reply.score * 0.4 + thesis.score * 0.6 }}！</h1>
         </el-card>
